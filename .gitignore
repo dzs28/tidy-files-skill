@@ -1,0 +1,3 @@
+# 测试运行产生的沙盒与结果，不进仓库
+evals/workspace/
+.DS_Store

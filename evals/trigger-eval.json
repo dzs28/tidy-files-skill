@@ -1,0 +1,23 @@
+[
+  {"query": "我桌面太乱了，全是截屏和微信传过来的图，还有几个项目文件夹和一堆 docx，帮我按类别收一收，别删东西", "should_trigger": true},
+  {"query": "把 ~/Downloads 里这两个月下的东西归一下类：安装包、pdf、图片各放一个文件夹，同名的别覆盖", "should_trigger": true},
+  {"query": "我用 claude 和 codex 做了好几个小项目，散在桌面、文稿夹和 ~/Documents/Codex 里，能不能统一放到一个大文件夹，一个项目一夹，零碎的放一起", "should_trigger": true},
+  {"query": "论文的东西太散了：开题报告在桌面，查重报告在下载夹，答辩 ppt 在 iCloud，帮我按开题/初稿/查重/答辩/终稿这样归到一个文件夹里", "should_trigger": true},
+  {"query": "clean up my desktop pls, group screenshots / videos / installers into folders, dont delete anything", "should_trigger": true},
+  {"query": "icloud 云盘根目录堆了几十个旧课件和准考证，就在云盘里给它们分分类，不要搬到本地", "should_trigger": true},
+  {"query": "把 stock-tool 相关的资料（桌面那个 docx、下载夹里的旧脚本）都收进 ~/Desktop/agent/stock-tool 里，注意那个目录 launchd 在用别把它挪了", "should_trigger": true},
+  {"query": "帮我建个结构：一个总文件夹，里面按项目分子文件夹，把现在桌面上散的 html/py 文件各归各位，最后写个说明每个夹是干嘛的", "should_trigger": true},
+  {"query": "整理一下 ~/Documents/New project，里面 codex 生成的图片、脚本、md 混在一起，按项目分开放", "should_trigger": true},
+  {"query": "有 8 个版本的 邓某某毕业论文*.docx 散在三个地方，帮我收到一起，按版本顺序放，别覆盖", "should_trigger": true},
+
+  {"query": "下载夹有 20 多 G 的 dmg 和 zip，帮我找出重复的和没用的删掉，腾点磁盘空间", "should_trigger": false},
+  {"query": "把 ~/Desktop/agent/daily-report 目录打包成 zip 发给我", "should_trigger": false},
+  {"query": "帮我写一个 python 脚本，监听 ~/Downloads，新文件按扩展名自动移到对应文件夹", "should_trigger": false},
+  {"query": "看一下我桌面上的 报告终稿.docx 和 下载夹里同名那份哪个新，内容有什么区别", "should_trigger": false},
+  {"query": "把这个项目的 src 目录重构一下，按 feature 拆模块，文件太多了", "should_trigger": false},
+  {"query": "帮我把这 30 张截图批量重命名成 日期_序号.png 的格式", "should_trigger": false},
+  {"query": "iCloud 空间满了，看看哪些大文件可以从云盘里清掉", "should_trigger": false},
+  {"query": "git 仓库里有很多没用的分支和大文件，帮我清理一下历史", "should_trigger": false},
+  {"query": "帮我把桌面上那几个 pdf 合并成一个，按文件名顺序", "should_trigger": false},
+  {"query": "卸载 ModelSim 和 CiteSpace，把它们的安装包和残留配置都清掉", "should_trigger": false}
+]

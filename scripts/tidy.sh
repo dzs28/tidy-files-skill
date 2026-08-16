@@ -40,7 +40,7 @@ mvr() {
 }
 
 inv() {
-  local d
+  local d n   # 提前声明；zsh 里在循环内反复 local 同一个变量会把它的值打印出来
   for d in "$@"; do
     [ -d "$d" ] || { echo "== $d (不存在)"; continue; }
     echo "== $d"
@@ -49,7 +49,6 @@ inv() {
     find "$d" -mindepth 1 -maxdepth 1 -type f ! -name '.DS_Store' ! -name '.localized' 2>/dev/null \
       | sed -E -e 's/.*\.([A-Za-z0-9]+)$/\1/' -e 't' -e 's/.*/(无扩展名)/' \
       | tr 'A-Z' 'a-z' | sort | uniq -c | sort -rn
-    local n
     n=$(find "$d" -mindepth 1 -maxdepth 1 -type d ! -name '.*' 2>/dev/null | wc -l | tr -d ' ')
     echo "   子目录: $n 个"
   done

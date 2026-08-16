@@ -1,0 +1,55 @@
+{
+  "skill_name": "tidy-files",
+  "notes": "每个用例先用 evals/files/make_fixture.sh <沙盒目录> 生成一份乱文件沙盒，把提示词里的 <SANDBOX> 换成该目录；跑完用 evals/files/check_fixture.sh <沙盒目录> 自动核对“文件一个没少、同名不覆盖、有 README”。",
+  "evals": [
+    {
+      "id": 1,
+      "name": "agent-outputs-by-project",
+      "prompt": "我现在需要把 <SANDBOX> 里所有用 agent 做的项目文件整理一下：第一，不管是哪个工具做的都统一归纳；第二，用嵌套模式，一个大文件夹里每个项目一个小文件夹；第三，无从归纳的小任务统一放一起；第四，不要删除任何文件，只移动和新建。桌面在 <SANDBOX>/桌面，下载夹在 <SANDBOX>/下载，文稿夹在 <SANDBOX>/文稿。",
+      "expected_output": "在 <SANDBOX>/桌面 下出现一个大文件夹（如 agent/），stock-tool、diet-miniapp 各一夹，speedtest.py/网速测试.html/ym.html 归到 小任务/ 之类的兜底夹；下载夹里的 stock-tool-旧版 和 文稿/Codex 里有产出的会话夹并入对应项目或小任务；空会话夹留在原地；有 README 索引；一个文件都没丢，同名的没覆盖。",
+      "files": ["evals/files/make_fixture.sh", "evals/files/check_fixture.sh"],
+      "expectations": [
+        "整理后沙盒里的文件总数不少于整理前（check_fixture.sh 报 PASS: 文件一个没少）",
+        "存在一个新的大文件夹，里面 stock-tool 和 diet-miniapp 各占一个子文件夹",
+        "speedtest.py、网速测试.html、ym.html 被放进一个兜底的小任务/零散类子文件夹，而不是散在大文件夹根目录",
+        "下载夹里的 stock-tool-旧版 被并入 stock-tool 相关位置（子夹或注明来源的夹），没有覆盖桌面版 server.js",
+        "文稿/Codex/2026-07-14/bang 的产出被并入大文件夹（名字带来源或日期），而空的 2026-07-28/xani 没有被搬",
+        "大文件夹根目录有 README.md，写明每个子夹是什么、原来在哪",
+        "没有用 rm 删除任何文件，也没有 cp 出重复文件"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "thesis-by-stage-with-collisions",
+      "prompt": "帮我把 <SANDBOX> 里所有和论文相关的文件都整理好，不管是图片还是什么，一样是大文件夹嵌套小文件夹，文件夹名称按内容来分，比如开题、初稿、查重报告这样。也是不要删除，只移动和创建。桌面在 <SANDBOX>/桌面，下载夹在 <SANDBOX>/下载。",
+      "expected_output": "出现一个论文大文件夹，子夹按流程阶段命名（含开题、初稿/修改稿、查重报告、插图等，可带数字前缀），桌面 开题报告/、毕业设计/ 被整个改名搬入而不是留空壳；下载夹里数字编号的查重报告夹被改成可读名字；~$ 锁文件跟着走但没被删；有 README；文件一个没丢。",
+      "files": ["evals/files/make_fixture.sh", "evals/files/check_fixture.sh"],
+      "expectations": [
+        "check_fixture.sh 报 PASS: 文件一个没少",
+        "存在论文大文件夹，且至少有 开题、初稿/修改稿、查重报告、插图 四类内容各自的子文件夹",
+        "子文件夹名是中文、按内容命名（不是 folder1/reports 这类），若有数字前缀则顺序符合流程",
+        "桌面上原来的 开题报告/ 和 毕业设计/ 没有留下空壳（整夹改名搬入）",
+        "下载夹里 2026060808185641292977/ 被改成含日期或用途的可读名字后放进查重报告子夹",
+        "~$邓某某开题报告.docx 锁文件仍然存在（没有被删除）",
+        "论文大文件夹根目录有 README.md，并提到锁文件可以自己删",
+        "与论文无关的文件（播出时间.xlsx、setup.dmg 等）没有被搬进论文文件夹"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "loose-files-by-type",
+      "prompt": "现在把 <SANDBOX> 里那些没地方归纳的东西，像截图、散的视频、安装包，统一装到桌面的一个文件夹里，按文件类型分成小文件夹，区分度不用那么高。同样只移动不删除。桌面在 <SANDBOX>/桌面，下载夹在 <SANDBOX>/下载。",
+      "expected_output": "桌面下出现一个零散文件大夹，按类型分 截图/图片/视频/文档/安装包 之类的子夹；两张桌面截屏、IMG_0215.PNG、微信图片进截图或图片类；mp4 进视频；dmg 进安装包；两份同名 报告终稿.docx 都保留（一份进重复副本类子夹）；URL 编码的 pdf 被解码改名；有 README；文件一个没丢。",
+      "files": ["evals/files/make_fixture.sh", "evals/files/check_fixture.sh"],
+      "expectations": [
+        "check_fixture.sh 报 PASS: 文件一个没少",
+        "桌面下存在一个按类型分子夹的大文件夹，子夹数量在 3～7 个之间（区分度不高）",
+        "截屏和手机截图都在同一个截图/图片类子夹里，mp4 在视频类子夹，dmg 在安装包类子夹",
+        "两份内容不同的 报告终稿.docx 都还在，其中一份放在重复副本/或类似命名的子夹里，没有被覆盖",
+        "%E5%85%B3%E4%BA%8E%E9%80%9A%E7%9F%A5.pdf 被改成解码后的中文名（关于通知.pdf）",
+        "已经是文件夹的项目目录（stock-tool、diet-miniapp、开题报告、毕业设计）没有被拆散搬进零散文件夹",
+        "大文件夹根目录有 README.md"
+      ]
+    }
+  ]
+}
