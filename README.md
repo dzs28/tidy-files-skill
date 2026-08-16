@@ -11,7 +11,7 @@
 
 ```bash
 # 装成个人级 skill（对所有项目生效）
-git clone https://github.com/<你的用户名>/tidy-files-skill ~/.claude/skills/tidy-files
+git clone https://github.com/dzs28/tidy-files-skill ~/.claude/skills/tidy-files
 ```
 
 或者放进某个项目的 `.claude/skills/tidy-files/`。之后在 Claude Code 里说"帮我整理一下桌面 / 把这些文件归纳到一个文件夹"就会触发；也可以直接 `/tidy-files`。
